@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Login{% endblock %}
+{% block css_files %}
+<link rel="stylesheet" type="text/css" href="{% static 'application/index.css' %}">
+{% endblock %}
+{% block content %}
+<div class="search-area">
+  <form action="{% url 'search-results' %}" method="GET">
+    {% csrf_token %}
+  <input required class="search-input" type='text' name='q' placeholder='Search Articles' value="{{ request.GET.q }}">
+    <button class="search-btn" type="submit">go</button>
+  </form>
+</div>
+    <section class="container-main">
+  <h2>Search Results</h2>
+  {% if results %}
+  <ul>
+  {% for result in results %}
+  <p><a href="{% url 'article-detail' result.slug %}">{{ result.title }}</a></p>
+  {% endfor %}
+  </ul>
+  {% else %}
+  <p>Sorry, no results where found</p>
+  {% endif %}
+  </section>
+{% endblock %}

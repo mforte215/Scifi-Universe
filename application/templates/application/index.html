@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" type="text/css" href="{% static 'application/index.css' %}">
+{% endblock %}
+{% block content %}
+<main> 
+<div class="search-area">
+  <form action="{% url 'search-results' %}" method="GET">
+    {% csrf_token %}
+  <input required class="search-input" type='text' name='q' placeholder='Search Articles' value="{{ request.GET.q }}">
+    <button class="search-btn" type="submit">go</button>
+  </form>
+</div>
+{% for article in articles %}
+        <a class="article-link" href="{% url 'article-detail' article.slug %}">
+    <section class="container-main">
+
+            <div class="page-header">
+
+                <div class="article-snippet">
+
+                    <img class="header-image" src="{{ article.image.url }}">
+                    <p class="article-title">
+                        {{ article.title }}
+                    </p>
+                    <h2>{{ article.snippet }}</h2>
+
+                </div>
+
+            </div>
+
+    </section>
+            </a>
+    {% endfor %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</main>
+{% endblock %}

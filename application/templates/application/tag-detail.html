@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title%}
+Sci-fi Universe
+{% endblock %}
+{% block css_files %}
+<link rel="stylesheet" type="text/css" href="{% static 'application/index.css' %}">
+{% endblock %}
+{% block content %}
+<main class="main-content">
+    <section class="container-main">
+    <h2>Tags</h2>
+    {% if related_articles %}
+    <ul>
+    {% for article in related_articles %}
+    <p><a href="{% url 'article-detail' article.slug %}">{{ article }}</a></p>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <h3>Sorry no related articles!</h3>
+    {% endif %}
+    </section>
+</main>
+{% endblock %}

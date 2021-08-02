@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title%}
+Sci-fi Universe
+{% endblock %}
+{% block css_files %}
+<link rel="stylesheet" type="text/css" href="{% static 'application/index.css' %}">
+{% endblock %}
+{% block content %}
+<main class="main-content">
+    <section class="container-main">
+    <div class="article-snippet">
+            <p class="article-title">
+            {{ article.title }}
+        </p>
+        <img class="header-image" src="{{ article.image.url }}">
+        <h2 class="article-subheader">{{ article.snippet }}</h2>
+        <p>By {{ article.author }} at {{ article.published_date }}</p>
+        <div class="article-text-area">
+        <p > {{ article.text|safe }} </p>
+        </div>
+    </div>
+    <div class="tag-area">
+    <span>Filed Under:
+    {% for tag in article.tags.all %}
+    <a href="{% url 'tag-detail' tag.slug  %}" >{{ tag.name }}</a>
+    {% endfor %}
+    </span>
+    </div>
+    <div class="comment-area">
+    <h2>Comments</h2>
+    {% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {% for form_field in comment_form %}
+            <div class="comment-form">
+            {{ form_field }}
+            </div>
+        {% endfor %}
+        <button class="comment-btn" type="submit">Submit</button>
+    </form>
+    {% else %}
+        <p><a href="{% url 'login' %}">Login to comment</a></p>
+    {% endif %}
+    <div class="comments-section">
+        <ul>
+        {% if comments %}
+            {% for comment in comments %}
+            <li>
+            <p>{{ comment.commentor }} says: {% if comment.commentor == user %}
+            <form method="POST" action="{% url 'delete-comment' comment.id %}">{% csrf_token %}
+            <input class="comment-btn" type="submit" onclick="return confirm('Are you sure you?')" value="delete" >
+            </form>
+            {% endif %}</p>
+            <p class="comment-text" >{{ comment.text }}<p></li>
+            <hr>
+            {% endfor %}
+        {% else %}
+        <p>No comments yet!</p>
+
+        {% endif %}
+        </ul>
+</main>
+{% endblock %}

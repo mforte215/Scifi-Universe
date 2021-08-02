@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Page - Not Found{% endblock %}
+{% block css_files %}
+<link rel="stylesheet" type="text/css" href="{% static 'application/index.css' %}">
+{% endblock %}
+{% block content %}
+    <section class="container-main">
+    <h1>Sorry Page Not Found!</h1>
+    <a href="{% url 'index' %}">Return Home</a>
+  </section>
+{% endblock %}
