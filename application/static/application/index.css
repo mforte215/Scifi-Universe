@@ -58,7 +58,7 @@ header-image-detail {
     padding-top: 40px;
     padding-bottom: 20px;
     border-radius: 7px;
-    box-shadow: inset 0 0 10px;
+    box-shadow: 0 0 10px;
 
 }
 
@@ -76,7 +76,7 @@ header-image-detail {
 }
 
 .main-content {
-    background-color: darkgrey;
+    background-color: navy;
 }
 
 .button-container {
@@ -98,11 +98,12 @@ header-image-detail {
 }
 
 .logo-image {
-    height: 2rem;
+    height: 4rem;
     width: auto;
     vertical-align: top;
+    padding-left: 0;
+    box-shadow: 0 0 10px;
 }
-
 .sign-up-form {
     text-align: left;
     width: 40%;
@@ -160,7 +161,16 @@ header-image-detail {
 
 
 .search-input {
-    border: 2px solid blue;
+    border: 2px solid black;
+    border-radius: 5px;
+    height: 30px;
+    font-size: x-large;
+    padding-left: 7px;
+    width: 40%;
+}
+
+.search-input :active {
+    border: 2px solid black;
     border-radius: 5px;
     height: 30px;
     font-size: x-large;
@@ -198,5 +208,14 @@ header-image-detail {
     .search-input {
         width: 60%;
     }
+    .logo-image {
+        height: 2rem;
+        width: auto;
+        vertical-align: top;
+        padding-left: 0;
+        box-shadow: 0 0 10px;
+        margin-top: 10px;
+    }
+    
 }
 
