@@ -30,7 +30,7 @@ class Article(models.Model):
     text = RichTextField()
     slug = models.SlugField(unique=True, db_index=True, blank=True, max_length=255)
     tags = models.ManyToManyField(Tag, related_name="articles")
-    image = models.ImageField(upload_to="articles", null=True)
+    image = models.URLField()
     top_post = models.BooleanField(default=False)
 
     def __str__(self):
